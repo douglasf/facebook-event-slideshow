@@ -1,0 +1,70 @@
+body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+  background: #FFF;
+}
+body.playing {
+  background: url(loading.svg) no-repeat center center;
+}
+.input-container {
+  font-size: 4em;
+  font-weight: 100;
+  border-bottom: 2px solid cornflowerblue;
+  width: 40vw;
+  position: absolute;
+  left: 50%;
+  margin-left: -20vw;
+  top: 30vh;
+  transition: all 0.5s ease-out;
+}
+.playing .input-container {
+  left: 30px;
+  top: 10px;
+  margin-left: 0;
+  border-bottom: none;
+}
+.hash {
+  width: 0.7em;
+  float: left;
+}
+.input {
+  width: auto;
+  overflow: hidden;
+}
+input[type=text] {
+  width: 100%;
+  font-size: 1em;
+  font-weight: 100;
+  border: none;
+  border-radius: 0;
+  outline: none;
+}
+.button-container {
+  position: absolute;
+  top: 45vh;
+  width: 100%;
+  text-align: center;
+  transition: all 0.2s ease-out;
+}
+.playing .button-container {
+  opacity: 0;
+}
+.button-container button {
+  font-size: 4em;
+  border: none;
+  background-color: cornflowerblue;
+  color: #FFF;
+  line-height: 1em;
+  padding: 0.1em 1em;
+  border-radius: 4px;
+  box-shadow: 1px 3px 10px rgba(0,0,0,0.4);
+  outline: none;
+  cursor: pointer;
+}
+.button-container button:active {
+  box-shadow: none;
+  background-color: rgb(80,119,189);
+}
