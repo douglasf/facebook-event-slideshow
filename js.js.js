@@ -16,11 +16,11 @@
       url: 'https://api.instagram.com/v1/users/self/media/recent/?access_token=' + access_token + '&callback=foo',
       type: 'GET',
       crossDomain: true,
-      dataType: 'jsonp'
+      dataType: 'jsonp',
+      success: function(data) {
+        console.log(data);
+      }
     });
-    var foo = function(data) {
-      console.log(data);
-    };
   });
 
   $(window).on('keydown', function(e) {
