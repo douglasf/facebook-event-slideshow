@@ -15,7 +15,8 @@
     $.ajax({
       url: 'https://api.instagram.com/v1/users/self/media/recent/?access_token=' + access_token + '&callback=foo',
       type: 'GET',
-      crossDomain: true
+      crossDomain: true,
+      dataType: 'jsonp'
     });
     var foo = function(data) {
       console.log(data);
