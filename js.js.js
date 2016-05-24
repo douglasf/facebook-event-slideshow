@@ -18,7 +18,7 @@
   }
 
   var reload = function() {
-    $('body').css('background-image', 'url(' + images[images_i].images.standard_resolution.url + ')');
+    $('body').css('background-image', 'url(' + images[images_i-1].images.standard_resolution.url + ')');
     images_i = images_i - 1;
     if (images_i === 0) images_i = images.length;
   }
