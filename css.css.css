@@ -25,19 +25,20 @@ body.playing.loaded {
   box-sizing: border-box;
 }
 .playing .input-container {
-  left: 0;
-  top: 0;
+  left: 30px;
+  top: 10px;
   margin-left: 0;
-  /*border-bottom: none;*/
-  width: 100vw;
-  padding: 10px;
+  border-bottom: none;
+  /*width: 100vw;*/
+  /*padding: 10px;*/
 }
 .playing.loaded .input-container {
-  background-color: rgba(100,149,237, 0.3);
+  /*background-color: rgba(100,149,237, 0.3);*/
 }
 .hash {
   width: 0.7em;
   float: left;
+  font-weight: 600;
 }
 .input {
   width: auto;
