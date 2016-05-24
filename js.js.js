@@ -4,7 +4,7 @@
   var update = function() {
     clearInterval(reload_timeout);
     $.ajax({
-      url: 'https://api.instagram.com/v1/tags/coldplay/media/recent/?access_token=' + access_token + '&callback=foo',
+      url: 'https://api.instagram.com/v1/tags/totesjelly/media/recent/?access_token=' + access_token + '&callback=foo',
       type: 'GET',
       crossDomain: true,
       dataType: 'jsonp',
