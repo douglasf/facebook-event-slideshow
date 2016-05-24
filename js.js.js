@@ -1,17 +1,16 @@
 (function($) {
-  var feed = new Instafeed({
-    get: 'tagged',
-    tagName: 'awesome',
-    clientId: '31c7a58c9b2d44aaa996be3704daaea3',
-    success: function(data) {
-      console.log(data);
-    }
-  });
 
   $('#play').on('click', function() {
     $('body').addClass('playing');
     $('input').attr('disabled', 'disabled');
-    feed.run();
+    $.ajax({
+      url: 'https://api.instagram.com/v1/tags/snowy/media/recent?client_id=31c7a58c9b2d44aaa996be3704daaea3&callback=foo',
+      type: 'GET',
+      crossDomain: true
+    });
+    var foo = function(data) {
+      console.log(data);
+    };
   });
 
   $(window).on('keydown', function(e) {
