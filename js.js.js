@@ -33,9 +33,11 @@
   });
 
   $('#play').on('click', function() {
-    $('body').addClass('playing');
-    $('input').attr('disabled', 'disabled');
-    update_timeout = setInterval(update, 20000);
+    if (!$(this).attr('href')) {
+      $('body').addClass('playing');
+      $('input').attr('disabled', 'disabled');
+      update_timeout = setInterval(update, 20000);
+    }
   });
 
   $(window).on('keydown', function(e) {
