@@ -28,7 +28,7 @@ body.playing.loaded {
   left: 0;
   top: 0;
   margin-left: 0;
-  border-bottom: none;
+  /*border-bottom: none;*/
   width: 100vw;
   padding: 10px;
 }
@@ -51,6 +51,7 @@ input[type=text] {
   border-radius: 0;
   outline: none;
   background: none;
+  color: #333;
 }
 .playing.loaded .hash,
 .playing.loaded input[type=text] {

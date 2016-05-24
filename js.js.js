@@ -38,6 +38,7 @@
   });
 
   $(document).ready(function() {
+    $('input').focus();
     access_token = location.hash.split('=')[1] || undefined;
     if (access_token) {
       $('#play').removeAttr('data-href').attr('disabled', 'disabled').text('Starta');
