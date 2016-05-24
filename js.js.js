@@ -13,7 +13,7 @@
     $('body').addClass('playing');
     $('input').attr('disabled', 'disabled');
     $.ajax({
-      url: 'https://api.instagram.com/v1/tags/snowy/media/recent?access_token=' + access_token + '&callback=foo',
+      url: 'https://api.instagram.com/v1/users/self/media/recent/?access_token=' + access_token + '&callback=foo',
       type: 'GET',
       crossDomain: true
     });
