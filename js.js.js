@@ -10,7 +10,6 @@
       dataType: 'jsonp',
       success: function(data) {
         console.log("New data loaded", data);
-        $('body').addClass('loaded');
         images = data.data;
         images_i = images.length;
         reload_timeout = setInterval(reload, 2000);
@@ -20,9 +19,14 @@
 
   var reload = function() {
     console.log("New background image attached");
-    $('body').css('background-image', 'url(' + images[images_i-1].images.standard_resolution.url + ')');
-    images_i = images_i - 1;
-    if (images_i === 0) images_i = images.length;
+    var img = new Image();
+    img.onload = function() {
+      $('body').addClass('loaded');
+      $('body').css('background-image', 'url(' + this.src + ')');
+      images_i = images_i - 1;
+      if (images_i === 0) images_i = images.length;
+    }
+    img.src = images[images_i-1].images.standard_resolution.url;
   }
 
   $(document).ready(function() {
