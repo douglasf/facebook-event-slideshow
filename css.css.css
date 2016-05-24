@@ -9,6 +9,9 @@ body {
 body.playing {
   background: url(loading.svg) no-repeat center center;
 }
+body.playing.loaded {
+  background-size: cover;
+}
 .input-container {
   font-size: 4em;
   font-weight: 100;
@@ -41,6 +44,11 @@ input[type=text] {
   border: none;
   border-radius: 0;
   outline: none;
+  background: none;
+}
+.playing.loaded .hash,
+.playing.loaded input[type=text] {
+  color: #FFF;
 }
 .button-container {
   position: absolute;
