@@ -3,7 +3,6 @@
 
   var update = function() {
     clearInterval(reload_timeout);
-    clearInterval(update_timeout);
     $.ajax({
       url: 'https://api.instagram.com/v1/users/self/media/recent/?access_token=' + access_token + '&callback=foo',
       type: 'GET',
