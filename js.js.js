@@ -1,12 +1,20 @@
 (function($) {
+  var access_token;
+
+  $(document).ready(function() {
+    access_token = location.hash.split('=')[1] || undefined;
+    console.log(access_token);
+    if (access_token) {
+      $('#play').removeAttr('disabled');
+    }
+  });
 
   $('#play').on('click', function() {
     $('body').addClass('playing');
     $('input').attr('disabled', 'disabled');
     $.ajax({
-      url: 'https://api.instagram.com/v1/tags/snowy/media/recent?client_id=31c7a58c9b2d44aaa996be3704daaea3&callback=foo',
-      type: 'GET',
-      crossDomain: true
+      url: 'https://api.instagram.com/v1/tags/snowy/media/recent?access_token=' + access_token + '&callback=foo',
+      type: 'GET'
     });
     var foo = function(data) {
       console.log(data);
