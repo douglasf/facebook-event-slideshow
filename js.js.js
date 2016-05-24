@@ -28,7 +28,7 @@
   $(document).ready(function() {
     access_token = location.hash.split('=')[1] || undefined;
     if (access_token) {
-      $('#play').removeAttr('href').text('&#9758;');
+      $('#play').removeAttr('href').text('Starta');
     }
   });
 
