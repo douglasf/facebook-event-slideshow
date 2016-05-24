@@ -1,10 +1,10 @@
 (function($) {
-  var access_token, update_timeout, reload_timeout, images, images_i;
+  var access_token, update_timeout, reload_timeout, images, images_i, tag;
 
   var update = function() {
     clearInterval(reload_timeout);
     $.ajax({
-      url: 'https://api.instagram.com/v1/tags/flipper/media/recent/?access_token=' + access_token + '&callback=foo',
+      url: 'https://api.instagram.com/v1/tags/' + tag + '/media/recent/?access_token=' + access_token + '&callback=foo',
       type: 'GET',
       crossDomain: true,
       dataType: 'jsonp',
@@ -29,24 +29,35 @@
     img.src = images[images_i-1].images.standard_resolution.url;
   }
 
+  $('input').on('input', function() {
+    if (!$(this).val() && !$('#play').data('href')) {
+      $('#play').attr('disabled', 'disabled');
+    } else {
+      $('#play').removeAttr('disabled');
+    }
+  });
+
   $(document).ready(function() {
     access_token = location.hash.split('=')[1] || undefined;
     if (access_token) {
-      $('#play').removeAttr('href').text('Starta');
+      $('#play').removeAttr('data-href').attr('disabled', 'disabled').text('Starta');
     }
   });
 
   $('#play').on('click', function() {
-    if (!$(this).attr('href')) {
+    if (!$(this).data('href')) {
       $('body').addClass('playing');
       $('input').attr('disabled', 'disabled');
+      tag = $('input').val();
       update_timeout = setInterval(update, 20000);
+    } else {
+      location.href = $(this).data('href');
     }
   });
 
   $(window).on('keydown', function(e) {
     if (e.which === 27) {
-      $('body').removeClass('playing');
+      $('body').removeClass('playing loaded');
       $('body').removeAttr('style');
       $('input').removeAttr('disabled');
       clearInterval(update_timeout);
