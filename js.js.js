@@ -3,13 +3,14 @@
 
   var update = function() {
     clearInterval(reload_timeout);
+    clearInterval(update_timeout);
     $.ajax({
       url: 'https://api.instagram.com/v1/users/self/media/recent/?access_token=' + access_token + '&callback=foo',
       type: 'GET',
       crossDomain: true,
       dataType: 'jsonp',
       success: function(data) {
-        console.log("New data loaded");
+        console.log("New data loaded", data);
         $('body').addClass('loaded');
         images = data.data;
         images_i = images.length;
