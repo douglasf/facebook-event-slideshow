@@ -8,7 +8,7 @@
       crossDomain: true,
       dataType: 'jsonp',
       success: function(data) {
-        console.log(data);
+        console.log(data.data);
         $('body').addClass('loaded');
         images = data.data;
         images_i = images.length;
