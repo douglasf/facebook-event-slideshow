@@ -12,7 +12,7 @@
         $('body').addClass('loaded');
         images = data.data;
         images_i = images.length;
-        reload_timeout = window.setTimeout(reload, 1000);
+        reload_timeout = window.setInterval(reload, 1000);
       }
     });
   }
@@ -33,15 +33,15 @@
   $('#play').on('click', function() {
     $('body').addClass('playing');
     $('input').attr('disabled', 'disabled');
-    update_timeout = window.setTimeout(update, 20000);
+    update_timeout = window.setInterval(update, 20000);
   });
 
   $(window).on('keydown', function(e) {
     if (e.which === 27) {
       $('body').removeClass('playing');
       $('input').removeAttr('disabled');
-      window.clearTimeout(update_timeout);
-      window.clearTimeout(reload_timeout);
+      window.clearInterval(update_timeout);
+      window.clearInterval(reload_timeout);
     }
   });
 
