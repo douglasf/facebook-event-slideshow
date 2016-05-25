@@ -5,12 +5,16 @@ body {
   font-family: 'Roboto', sans-serif;
   color: #333;
   background: #FFF;
+  font-weight: 100;
 }
 body.playing {
   background: url(loading.svg) no-repeat center center;
 }
 body.playing.loaded {
   background-size: cover;
+}
+a {
+  color: #aaa;
 }
 .input-container {
   font-size: 4em;
@@ -87,4 +91,17 @@ input[type=text] {
 .button-container button:active {
   box-shadow: none;
   background-color: rgb(80,119,189);
+}
+.privacy {
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+  width: 100vw;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.privacy-policy {
+  width: 50vw;
+  text-align: center;
+  margin: 100px auto;
 }
