@@ -8,89 +8,38 @@ body {
   font-weight: 100;
 }
 body.playing {
-  background: url(loading.svg) no-repeat center center;
+  background-image: url(loading.svg);
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 body.playing.loaded {
-  background-size: cover;
+  background-size: contain;
 }
 a {
   color: #aaa;
 }
-.input-container {
-  font-size: 4em;
-  font-weight: 100;
-  border-bottom: 2px solid rgb(100,149,237);
-  width: 40vw;
-  position: absolute;
-  left: 50%;
-  margin-left: -20vw;
+.select-container {
+  text-align: center;
   top: 30vh;
-  transition: all 0.3s ease-out;
-  box-sizing: border-box;
-}
-.playing .input-container {
-  left: 30px;
-  top: 10px;
-  margin-left: 0;
-  border-bottom: none;
-  /*width: 100vw;*/
-  /*padding: 10px;*/
-}
-.playing.loaded .input-container {
-  /*background-color: rgba(100,149,237, 0.3);*/
-}
-.hash {
-  width: 0.7em;
-  float: left;
-  font-weight: 600;
-}
-.input {
-  width: auto;
-  overflow: hidden;
-}
-input[type=text] {
+  position: absolute;
   width: 100%;
-  font-size: 1em;
-  font-weight: 100;
-  border: none;
-  border-radius: 0;
-  outline: none;
-  background: none;
-  color: #333;
+  transition: all 0.3s ease-out;
 }
-.playing.loaded .hash,
-.playing.loaded input[type=text] {
-  color: #FFF;
+.playing .select-container {
+  top: 0;
+  font-size: 3em;
+  font-weight: 600;
+  background-color: rgba(255,255,255,0.6);
+}
+.playing .select-container label,
+.playing .select-container .md-select-icon {
+  display: none;
 }
 .button-container {
   position: absolute;
   top: 45vh;
   width: 100%;
   text-align: center;
-  transition: all 0.2s ease-out;
-}
-.playing .button-container {
-  opacity: 0;
-}
-.button-container button {
-  font-size: 2em;
-  text-transform: uppercase;
-  border: none;
-  background-color: rgb(100,149,237);
-  color: #FFF;
-  line-height: 1em;
-  padding: 0.7em 1.7em;
-  border-radius: 4px;
-  box-shadow: 1px 3px 10px rgba(0,0,0,0.4);
-  outline: none;
-  cursor: pointer;
-}
-.button-container button[disabled] {
-  background-color: rgba(100,149,237, 0.5);
-}
-.button-container button:active {
-  box-shadow: none;
-  background-color: rgb(80,119,189);
 }
 .privacy {
   position: absolute;

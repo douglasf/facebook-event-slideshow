@@ -2,13 +2,15 @@
 <html>
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
 	<title>Instagram</title>
-	<link rel="stylesheet" href="css.css.css" title="CSS"/>
+
   <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="node_modules/angular-material/angular-material.css">
+	<link rel="stylesheet" href="css.css.css" title="CSS"/>
 
 </head>
-<body>
+<body ng-controller="SlideShow" ng-class="[{'playing': playing, 'loaded': loaded}]" ng-app="SlideShow" ng-cloak ng-keypress="cancel($event)">
   <script>
     window.fbAsyncInit = function() {
       FB.init({
@@ -27,15 +29,19 @@
      }(document, 'script', 'facebook-jssdk'));
   </script>
 	
-  <div class="input-container">
-    <div class="hash">#</div>
-    <div class="input">
-      <input type="text" name="hash" id="hash" value="" placeholder="hashtag"/>
+  <div>
+    <div class="select-container">
+      <md-input-container ng-show="events">
+        <label>Välj event</label>
+        <md-select ng-model="event">
+          <md-option ng-value="event" ng-repeat="event in events.data">{{ event.name }}</md-option>
+        </md-select>
+      </md-input-container>
     </div>
-  </div>
-
-  <div class="button-container">
-    <button id="play" type="submit">Logga in</button>
+    <div class="button-container" ng-hide="playing">
+      <md-button ng-hide="auth" class="md-accent md-raised" ng-click="logIn()">Logga in</md-button>
+      <md-button ng-show="auth" class="md-accent md-raised" ng-disabled="!event" ng-click="play()">Starta</md-button>
+    </div>
   </div>
 
   <div class="privacy">
@@ -43,6 +49,10 @@
   </div>
 
   <script src="https://code.jquery.com/jquery-2.2.4.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="node_modules/angular/angular.js"></script>
+  <script src="node_modules/angular-aria/angular-aria.js"></script>
+  <script src="node_modules/angular-animate/angular-animate.js"></script>
+  <script src="node_modules/angular-material/angular-material.js"></script>
   <script src="js.js.js" type="text/javascript" charset="utf-8"></script>
 </body>
 </html>

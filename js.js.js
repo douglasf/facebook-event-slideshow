@@ -1,72 +1,79 @@
-(function($) {
-  var access_token, update_timeout, reload_timeout, images, images_i, tag;
+(function(angular, $) {
+  'use strict';
 
-  var update = function() {
-    clearInterval(reload_timeout);
-    $.ajax({
-      url: 'https://api.instagram.com/v1/tags/' + tag + '/media/recent/?access_token=' + access_token + '&callback=foo',
-      type: 'GET',
-      crossDomain: true,
-      dataType: 'jsonp',
-      success: function(data) {
-        console.log("New data loaded", data);
-        images = data.data;
-        images_i = images.length;
-        reload_timeout = setInterval(reload, 2000);
+  var SlideShow = ['$scope', function($scope) {
+
+    var reload_interval,
+        slide_interval,
+        slide_timer,
+        each_slide_timer = 2000;
+
+    $scope.images = [];
+
+    $scope.logIn = function() {
+      FB.login(function(res) {
+        $scope.auth = res.authResponse;
+        $scope.$apply();
+      }, { scope: 'user_events' });
+    };
+
+    $scope.cancel = function(e) {
+      if (e.keyCode === 32) {
+        $scope.playing = false;
+        $scope.loaded = false;
+        clearInterval(slide_interval);
+        clearInterval(reload_interval);
+        $('body').removeAttr('style')
+      }
+    }
+
+    $scope.play = function() {
+      console.log("Loading photos");
+      $scope.playing = true;
+      FB.api('/' + $scope.event.id + '/photos', function(res) {
+        FB.api('/', 'POST', {
+          batch: res.data.map(function(image) {
+            return { relative_url: image.id + '?fields=images', method: 'GET' }
+          })
+        }, function(res) {
+          $scope.images = res.map(function(obj) {
+            return $.parseJSON(obj.body).images[0].source;
+          });
+          $scope.$apply();
+
+          reload_interval = setTimeout($scope.play, $scope.images.length * each_slide_timer);
+
+        });
+      });
+    };
+  
+    $scope.$watch('auth', function(nv, ov) {
+      if (nv) {
+        FB.api('/me/events', function(res) {
+          $scope.events = res;
+          $scope.$apply();
+        });
       }
     });
-  }
 
-  var reload = function() {
-    console.log("New background image attached");
-    var img = new Image();
-    img.onload = function() {
-      $('body').addClass('loaded');
-      $('body').css('background-image', 'url(' + this.src + ')');
-      images_i = images_i - 1;
-      if (images_i === 0) images_i = images.length;
-    }
-    img.src = images[images_i-1].images.standard_resolution.url;
-  }
+    $scope.$watch('images', function(nv, ov) {
+      if (ov.length !== nv.length) {
+        clearInterval(slide_interval);
+        slide_interval = setInterval(function() {
+          var img = new Image();
+          img.onload = function() {
+            $('body').css('background-image', 'url(' + $scope.images[0] + ')');
+            $scope.loaded = true;
+            $scope.$apply();
+          }
+          img.src = $scope.images[0];
+          $scope.images.push($scope.images.shift());
+        }, each_slide_timer);
+      }
+    }, true);
+  }];
 
-  $('input').on('input', function() {
-    if (!$(this).val() && !$('#play').data('href')) {
-      $('#play').attr('disabled', 'disabled');
-    } else {
-      $('#play').removeAttr('disabled');
-    }
-  });
+  angular.module( 'SlideShow', [ 'ngMaterial' ] )
+    .controller("SlideShow", SlideShow );
 
-  $(document).ready(function() {
-    $('input').focus();
-    access_token = location.hash.split('=')[1] || undefined;
-    if (access_token) {
-      $('#play').removeAttr('data-href').attr('disabled', 'disabled').text('Starta');
-    }
-  });
-
-  $('#play').on('click', function() {
-    if (false) {
-      $('body').addClass('playing');
-      $('input').attr('disabled', 'disabled');
-      tag = $('input').val();
-      update_timeout = setInterval(update, 20000);
-    } else {
-      FB.login(function(res){
-        // Note: The call will only work if you accept the permission request
-        console.log(res);
-      }, {scope: 'user_events'});
-    }
-  });
-
-  $(window).on('keydown', function(e) {
-    if (e.which === 27) {
-      $('body').removeClass('playing loaded');
-      $('body').removeAttr('style');
-      $('input').removeAttr('disabled');
-      clearInterval(update_timeout);
-      clearInterval(reload_timeout);
-    }
-  });
-
-})(jQuery)
+})(angular, jQuery)
