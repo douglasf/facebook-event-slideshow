@@ -21,14 +21,17 @@
       if (e.keyCode === 32) {
         $scope.playing = false;
         $scope.loaded = false;
+        $scope.images = [];
         clearInterval(slide_interval);
         clearInterval(reload_interval);
         $('body').removeAttr('style')
+        exitFullScreen();
       }
     }
 
     $scope.play = function() {
       console.log("Loading photos");
+      enterFullScreen();
       $scope.playing = true;
       FB.api('/' + $scope.event.id + '/photos', function(res) {
         FB.api('/', 'POST', {
@@ -57,7 +60,7 @@
     });
 
     $scope.$watch('images', function(nv, ov) {
-      if (ov.length !== nv.length) {
+      if (ov.length !== nv.length && $scope.playing) {
         clearInterval(slide_interval);
         slide_interval = setInterval(function() {
           var img = new Image();
@@ -72,6 +75,33 @@
       }
     }, true);
   }];
+
+  function enterFullScreen() {
+    if (!document.fullscreenElement &&    // alternative standard method
+        !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement ) {  // current working methods
+      if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+      } else if (document.documentElement.msRequestFullscreen) {
+        document.documentElement.msRequestFullscreen();
+      } else if (document.documentElement.mozRequestFullScreen) {
+        document.documentElement.mozRequestFullScreen();
+      } else if (document.documentElement.webkitRequestFullscreen) {
+        document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+      }
+    }
+  }
+
+  function exitFullScreen() {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+      document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    }
+  }
 
   angular.module( 'SlideShow', [ 'ngMaterial' ] )
     .controller("SlideShow", SlideShow );

@@ -23,6 +23,7 @@ a {
   top: 30vh;
   position: absolute;
   width: 100%;
+  font-size: 2em;
   transition: all 0.3s ease-out;
 }
 .playing .select-container {
