@@ -52,10 +52,10 @@
       tag = $('input').val();
       update_timeout = setInterval(update, 20000);
     } else {
-      FB.getLoginStatus(function(response) {
-        // this will be called when the roundtrip to Facebook has completed
-        console.log(response);
-      });
+      FB.login(function(res){
+        // Note: The call will only work if you accept the permission request
+        console.log(res);
+      }, {scope: 'user_events'});
     }
   });
 
