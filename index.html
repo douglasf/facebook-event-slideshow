@@ -9,6 +9,23 @@
 
 </head>
 <body>
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : 'your-app-id',
+        xfbml      : true,
+        version    : 'v2.6'
+      });
+    };
+
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "//connect.facebook.net/en_US/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+  </script>
 	
   <div class="input-container">
     <div class="hash">#</div>
@@ -18,7 +35,7 @@
   </div>
 
   <div class="button-container">
-    <button data-href="https://api.instagram.com/oauth/authorize/?client_id=31c7a58c9b2d44aaa996be3704daaea3&response_type=token&scope=public_content&redirect_uri=http://douglasf.github.io" id="play" type="submit">Logga in</button>
+    <button id="play" type="submit">Logga in</button>
   </div>
 
   <div class="privacy">
@@ -26,7 +43,6 @@
   </div>
 
   <script src="https://code.jquery.com/jquery-2.2.4.min.js" type="text/javascript" charset="utf-8"></script>
-  <script src="instafeed.min.js" type="text/javascript" charset="utf-8"></script>
   <script src="js.js.js" type="text/javascript" charset="utf-8"></script>
 </body>
 </html>

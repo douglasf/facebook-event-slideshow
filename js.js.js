@@ -46,13 +46,16 @@
   });
 
   $('#play').on('click', function() {
-    if (!$(this).data('href')) {
+    if (false) {
       $('body').addClass('playing');
       $('input').attr('disabled', 'disabled');
       tag = $('input').val();
       update_timeout = setInterval(update, 20000);
     } else {
-      location.href = $(this).data('href');
+      FB.getLoginStatus(function(response) {
+        // this will be called when the roundtrip to Facebook has completed
+        console.log(response);
+      });
     }
   });
 
