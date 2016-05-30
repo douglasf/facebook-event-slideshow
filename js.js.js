@@ -6,7 +6,7 @@
     var reload_interval,
         slide_interval,
         slide_timer,
-        each_slide_timer = 2000;
+        each_slide_timer = 4000;
 
     $scope.images = [];
 

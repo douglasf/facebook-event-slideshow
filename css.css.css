@@ -4,8 +4,13 @@ body {
   padding: 0;
   font-family: 'Roboto', sans-serif;
   color: #333;
-  background: #FFF;
+  background: rgb(255, 255, 255);
   font-weight: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 1.5s ease-in;
 }
 body.playing {
   background-image: url(loading.svg);
@@ -14,32 +19,19 @@ body.playing {
 }
 body.playing.loaded {
   background-size: contain;
+  background-color: rgb(30, 30, 30);
 }
 a {
   color: #aaa;
 }
+.playing * { cursor: none; }
 .select-container {
-  text-align: center;
-  top: 30vh;
-  position: absolute;
-  width: 100%;
   font-size: 2em;
-  transition: all 0.3s ease-out;
 }
 .playing .select-container {
-  top: 0;
-  font-size: 3em;
-  font-weight: 600;
-  background-color: rgba(255,255,255,0.6);
-}
-.playing .select-container label,
-.playing .select-container .md-select-icon {
   display: none;
 }
 .button-container {
-  position: absolute;
-  top: 45vh;
-  width: 100%;
   text-align: center;
 }
 .privacy {

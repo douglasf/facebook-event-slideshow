@@ -5,7 +5,8 @@
   <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
 	<title>Instagram</title>
 
-  <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,700' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,700,900' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="node_modules/angular-material/angular-material.css">
 	<link rel="stylesheet" href="css.css.css" title="CSS"/>
 
@@ -39,8 +40,10 @@
       </md-input-container>
     </div>
     <div class="button-container" ng-hide="playing">
-      <md-button ng-hide="auth" class="md-raised" ng-click="logIn()">Logga in</md-button>
-      <md-button ng-show="auth" class="md-raised" ng-disabled="!event" ng-click="play()">Starta</md-button>
+      <md-button ng-hide="auth" class="md-raised md-accent" ng-click="logIn()">Logga in</md-button>
+      <md-button ng-show="auth" class="md-raised md-accent md-fab" ng-disabled="!event" ng-click="play()">
+        <md-icon class="material-icons md-light md-48" md-font-set="material-icons">play_arrow</md-icon>
+      </md-button>
     </div>
   </div>
 
